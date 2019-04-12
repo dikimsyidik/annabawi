@@ -1,0 +1,85 @@
+{% extends 'pembukuan/base.html' %}
+{% block content %}
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              List Pemasukan
+            </h3>
+            <nav aria-label="breadcrumb">
+             <a href="
+             {% if jenis == 'Haji' %}
+             {% url 'pembayaran_haji' %}
+             {% else %}
+             {% url 'pembayaran_umroh' %}
+             {% endif %}
+
+             "> <button type="button" class="btn btn-success btn-icon-text">
+                  <i class="fa fa-plus btn-icon-prepend"></i>Tambah Baru
+              </button></a>
+            </nav>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-lg-9 grid-margin">
+                      <h4 class="card-title">Pembayaran {{ jenis }}</h4>
+                    </div>
+                    <div class="col-lg-3 col-md-2-offset grid-margin">
+                      <ul class="navbar-nav">
+                        <li class="nav-item nav-search d-md-flex">
+                          <div class="nav-link">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                              </div>
+                              <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                 
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th style="width: 5%">No</th>
+                          <th style="width: 20%;">Tanggal</th>
+                          <th style="width: 40%;">Nama</th>
+                          <th>Jumlah</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for ob in obj %}
+                        <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ ob.waktu }}</td>
+                          <td style="text-align: center;"><a href="">{{ ob.jemaah }}</a></td>
+                          <td style="width: 360px; text-align: right;">Rp. {{ ob.jumlah }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-10 col-md-10">Total</div>
+                    <div class="col-lg-2 col-md-2">Rp. {{ total }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+        
+        </footer>
+        <!-- partial -->
+      </div>
+{% endblock %}

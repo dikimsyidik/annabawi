@@ -1,0 +1,75 @@
+{% extends 'pembukuan/base.html' %}
+{% block content %}
+{% load static %}
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <h3 class="page-title" style="text-align: center; margin-bottom: 30px;">Input Data Jemaah {{ jenis }}</h3>
+          <div class="row">
+            <div class="col-md-3 grid-margin stretch-card"></div>
+            <div class="col-md-6 grid-margin stretch-card">
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title text-center">Formulir Identitas</h4>
+                  <form class="forms-sample">
+                    <div class="form-group row">
+                      <label for="exampleInputUsername2" class="col-sm-7 col-form-label">Pemberangkatan</label>
+                      <div class="col-sm-5">
+                       
+                        {{ form.rombongan }}
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nama</label>
+                      <div class="col-sm-9">
+                        {{ form.nama_lengkap }}
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputEmail2" class="col-sm-3 col-form-label">No. KTP</label>
+                      <div class="col-sm-9">
+                        {{ form.no_ktp}}
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputMobile" class="col-sm-3 col-form-label">Alamat</label>
+                      <div class="col-sm-9">
+                       
+                        {{ form.alamat }}
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">No. Telepon</label>
+                      <div class="col-sm-9">
+                        
+                        {{ form.no_hp }}
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Foto</label>
+                      <div class="col-sm-9">
+                       
+                        {{ form.foto }}
+                        <input class="dropify"data-default-file='{{ form.instance.foto.url }}'disabled="disabled" ></input>
+
+                       
+                      </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success mr-2">Submit</button>
+                  </form>
+                </div>
+              </div>
+             </form> 
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+        
+        </footer>
+        <!-- partial -->
+      </div>
+{% endblock %}

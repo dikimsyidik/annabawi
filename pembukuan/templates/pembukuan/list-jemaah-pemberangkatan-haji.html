@@ -1,0 +1,81 @@
+{% extends 'pembukuan/base.html' %}
+{% block content %}
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              Data Jemaah {{ jenis }}
+            </h3>
+            <nav aria-label="breadcrumb">
+              <button type="button" class="btn btn-success btn-icon-text">
+                  <i class="fa fa-plus btn-icon-prepend"></i>Tambah Baru
+              </button>
+            </nav>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-lg-9 grid-margin">
+                      <h4 class="card-title">Pemberangkatan {{ obj.pemberangkatan}}</h4>
+                    </div>
+                    <div class="col-lg-3 col-md-2-offset grid-margin"><form method="GET">
+                      <ul class="navbar-nav">
+                        <li class="nav-item nav-search d-md-flex">
+                          <div class="nav-link">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                              </div>
+                              <input name="q" type="text" class="form-control" placeholder="Search" aria-label="Search">
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                      </form>
+                    </div>
+                  </div>
+                 
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th style="width: 5%">No</th>
+                          <th style="width: 15%;">ID Jemaah</th>
+                          <th style="width: 15%;">Nama</th>
+                          <th>Alamat</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for jem in jemaah %}
+                        <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ jem.id }}</td>
+                          <td style="text-align: center;"><a href="
+                          {% if jenis == 'Haji' %}
+                          /dashboard/list_jemaah_haji/{{jem.id}}/
+                          {% else %}
+                          /dashboard/list_jemaah_umroh/{{jem.id}}/
+                          {% endif %}
+                          ">{{ jem.nama_lengkap }}</a></td>
+                          <td><p style="width: 560px; text-align: justify;">{{jem.alamat}}</p></td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                      </thead>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+        
+        </footer>
+        <!-- partial -->
+      </div>
+ {% endblock %}

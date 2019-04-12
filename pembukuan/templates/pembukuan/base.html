@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Annabawi</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="{% static 'vendors/iconfonts/font-awesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.addons.css' %}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- endinject -->
+</head>
+<body>
+  <div  class="container-scroller ">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar d-print-none">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" href="index.html"><img src="{% static 'images/logo-yayasan.png' %}" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{% static 'images/logo-yayasan.png' %}" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-stretch">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="fas fa-bars"></span>
+        </button>
+        
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="fas fa-bars"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div class="theme-setting-wrapper">
+        <div id="settings-trigger"><i class="fas fa-fill-drip"></i></div>
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close fa fa-times"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles primary"></div>
+            <div class="tiles success"></div>
+            <div class="tiles warning"></div>
+            <div class="tiles danger"></div>
+            <div class="tiles info"></div>
+            <div class="tiles dark"></div>
+            <div class="tiles default"></div>
+          </div>
+        </div>
+      </div>
+     
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas d-print-none" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item nav-profile">
+            <div class="nav-link">
+              <div class="profile-name">
+                <p class="name">
+                  Welcome Jane
+                </p>
+                <p class="designation">
+                  Super Admin
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'dashboard' %}">
+              <i class="fa fa-home menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-advancedf" aria-expanded="false" aria-controls="ui-advancedf">
+              <i class="fas fa-users menu-icon"></i>
+              <span class="menu-title">Data Jemaah</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-advancedf">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{% url 'list_jemaah_haji' %}">Haji</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'list_jemaah_umroh' %}">Umroh</a></li>
+              </ul>
+            </div>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
+              <i class="fas fa-paper-plane menu-icon"></i>
+              <span class="menu-title">Pemberangkatann</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-advanced">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{% url 'jadwal_haji' %}">Haji</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'jadwal_umroh' %}">Umroh</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-advanc" aria-expanded="false" aria-controls="ui-advanced">
+              <i class="fas fa-clipboard-list menu-icon"></i>
+              <span class="menu-title">Pemasukan</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-advanc">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{% url 'pemasukan_haji' %}">Haji</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'pemasukan_umroh' %}">Umroh</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="fab fa-wpforms menu-icon"></i>
+              <span class="menu-title">Pengeluaran</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="{% url 'tiket' %}">Tiket</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'la' %}">LA</a></li>  
+                <li class="nav-item"><a class="nav-link" href="{% url 'kendaraan' %}">Kendaraan</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'pembukuan_umroh' %}">Pembukuan Umroh</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'handling' %}">Handling</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'paspor' %}">Paspor</a></li> 
+                <li class="nav-item"><a class="nav-link" href="{% url 'transportasi' %}">Transportasi</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'atk' %}">ATK/Kantor</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'pembukuan_haji' %}">Pembukuan Haji</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'pembukuan_pajak' %}">Pembukuan Pajak</a></li> 
+                <li class="nav-item"><a class="nav-link" href="{% url 'pembukuan_honor_karyawan' %}">Pembukuan Honor Karyawan</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'tiket' %}">Rekapan Keseluruhan</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">
+              <i class="fas fa-power-off menu-icon"></i>
+              <span class="menu-title">Keluar</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+{% block content %}
+
+{% endblock %}
+</div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+  <script src="{% static 'vendors/js/vendor.bundle.addons.js' %}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'js/off-canvas.js' %}"></script>
+  <script src="{% static 'js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'js/misc.js' %}"></script>
+  <script src="{% static 'js/settings.js' %}"></script>
+  <script src="{% static 'js/todolist.js' %}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'js/dashboard.js' %}"></script>
+  <!-- End custom js for this page-->
+<script src="{% static 'js/dropify.js' %}"></script>
+
+</body>
+
+
+</html>

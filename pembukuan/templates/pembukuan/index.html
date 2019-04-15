@@ -28,7 +28,27 @@
                           <i class="icon-sm fas fa-chart-line mr-2"></i>
                           Pemasukan
                         </p>
-                        <h2>Rp. {{pemasukan_haji|intcomma}}</h2>
+                        <h2>Rp. {{pemasukan_haji |intcomma}}</h2>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row grid-margin">
+            <div class="col-12">
+              <div class="card card-statistics">
+                <div class="card-body">
+                  <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+                      <div class="statistics-item">
+                       
+                      </div>
+                      <div class="statistics-item">
+                        <p>
+                          <i class="icon-sm fas fa-chart-line mr-2"></i>
+                          Pemasukan
+                        </p>
+                        <h2>Rp. {{pemasukan_haji |sub:pengeluaran |intcomma}}</h2>
                       </div>
                   </div>
                 </div>
@@ -77,7 +97,7 @@
                           <i class="icon-sm fas fa-heart mr-2"></i>
                           Laba
                         </p>
-                        <h2>Rp. {{ pemasukan_haji|add:pemasukan_umroh |sub:pengeluaran |intcomma}} </h2>
+                        <h2>Rp. {{pemasukan_umroh |sub:pengeluaran |intcomma}} </h2>
                       </div>
                   </div>
                 </div>

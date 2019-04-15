@@ -333,9 +333,7 @@ def pembayaran_umroh(request):
 		obj.save()
 
 		
-		return HttpResponseRedirect('/dashboard/pemasukan_umroh/hasil/')		
-
-			
+		return HttpResponseRedirect('/dashboard/pembayaran_haji/kwitansi/{num}/'.format(num=obj.id))			
 	context = {'form':form,'jenis':jenis}
 	return render(request,'pembukuan/pembayaran.html',context)
 
@@ -366,6 +364,18 @@ def pemasukan_umroh(request):
 def kwitansi_haji(request,id = None):
 	obj = get_object_or_404(Pembayaran_Jemaah_Haji,id = id)
 	jenis = 'Haji'
+	query = request.GET.get("q", None)
+
+
+	
+	context = {'obj':obj,'jenis':jenis }
+	return render(request,'pembukuan/kwitansi.html',context)
+
+@login_required
+@user_passes_test(lambda u:u.is_superuser or u.email.endswith('@admin.com'))
+def kwitansi_umroh(request,id = None):
+	obj = get_object_or_404(Pembayaran_Jemaah_Umroh,id = id)
+	jenis = 'Umroh'
 	query = request.GET.get("q", None)
 
 

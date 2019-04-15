@@ -18,6 +18,8 @@ from data_jemaah.views import (
 							pemasukan_haji,
 							pemasukan_umroh,
 							kwitansi_haji,
+                            kwitansi_umroh,
+
 
                             jemaah_haji,
                             jemaah_haji_tambah,
@@ -93,6 +95,7 @@ urlpatterns = [
     path('pembayaran_haji/', pembayaran_haji,name='pembayaran_haji'),
     path('pembayaran_umroh/', pembayaran_umroh,name='pembayaran_umroh'),
     path('pembayaran_haji/kwitansi_haji/<int:id>/', kwitansi_haji,name='kwitansi_haji'),
+    path('pemasukan_umroh/kwitansi_umroh/<int:id>/', kwitansi_umroh,name='kwitansi_umroh'),
 
     path('list_jemaah_haji/', jemaah_haji,name='list_jemaah_haji'),
     path('list_jemaah_haji/tambah/', jemaah_haji_tambah,name='tambah_jemaah_haji'),

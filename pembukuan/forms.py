@@ -18,6 +18,7 @@ class TiketForm(forms.ModelForm):
 			fields = [
 				'rincian',
 				'jumlah',
+				'tanggal_input',
 
 			] 
 			
@@ -25,6 +26,8 @@ class TiketForm(forms.ModelForm):
 			widgets = {
 				'rincian':forms.Textarea(attrs={'class': 'form-control','rows':5,'placeholder':'Rincian'}),
 				'jumlah':forms.NumberInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
+				'tanggal_input':forms.TextInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
+
 			}
 
 

@@ -35,6 +35,7 @@ from data_jemaah.views import (
 
 from.views import (
                     dashboard,
+                    rekap,
                     tiket,
                     tiket_tambah,
                     tiket_hapus,
@@ -73,6 +74,8 @@ from.views import (
             )
 urlpatterns = [
     path('', dashboard,name='dashboard'),
+    path('rekap/', rekap,name='rekap'),
+
     path('jadwal_pemberangkatan_haji/', list_haji,name='jadwal_haji'),
     path('jadwal_pemberangkatan_haji/tambah_jadwal_haji', tambah_haji,name='tambah_haji'),
     path('jadwal_pemberangkatan_haji/<int:id>/', detail_haji,name='detail_haji'),

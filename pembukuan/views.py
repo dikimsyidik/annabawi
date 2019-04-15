@@ -1,7 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from django.db.models import Q
-from .forms import TiketForm
-
+from data_jemaah.models import Jemaah_Hajis,Jemaah_Umroh,Pembayaran_Jemaah_Umroh,Pembayaran_Jemaah_Haji
 from django.http import HttpResponseRedirect,HttpResponse
 from .models import (
 					Tiket,
@@ -20,13 +19,87 @@ from .models import (
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.decorators import user_passes_test
+from itertools import chain
+from .forms import (TiketForm,
+					LaForm,
+					KendaraanForm,
+					Pembukuan_UmrohForm,
+					HandlingForm,
+					PasporForm,
+					TransfortasiForm,
+					ATKForm,
+					Pembukuan_PajakForm,
+					Pembukuan_Honor_KaryawanForm,
+
+	)
+def rekap(request):
+	pengeluaran = 'Rekapan Keseluruhan'
+	query = request.GET.get("q", None)
+	obj = Tiket.objects.all()
+	tiket = Tiket.objects.all()
+	la = La.objects.all()
+	kendaraan = Kendaraan.objects.all()
+	pembukuan_umroh = Pembukuan_Umroh.objects.all()
+	handling = Handling.objects.all()
+	paspor = Paspor.objects.all()
+	transportasi = Transfortasi.objects.all()
+	atk = ATK.objects.all()
+	pembukuan_haji = Pembukuan_Haji.objects.all()
+	pembukuan_pajak = Pembukuan_Pajak.objects.all()
+	pembukuan_honor = Pembukuan_Honor_Karyawan.objects.all()
+	gabung = sorted(chain(tiket,
+						la,
+						kendaraan,
+						pembukuan_umroh,
+						handling,
+						paspor,
+						transportasi,
+						atk,
+						pembukuan_haji,
+						pembukuan_pajak,
+						pembukuan_honor,
+						),key = lambda instance:instance.jumlah)
+	hasil = gabung
+
+	total = 0
+	for gab in hasil:
+		total = total +gab.jumlah
+		print(gab.jumlah)
+	print(total)
+
+
+
+	context = {'obj':hasil,
+				'total':total,
+				'pengeluaran':pengeluaran,
+	}
+	return render(request,'pembukuan/tiket.html',context)
+
 
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
 def dashboard(request):
+	jemaah_haji = Jemaah_Hajis.objects.all().count()
+	jemaah_umroh = Jemaah_Umroh.objects.all().count()
+	pemasukan_haji = Pembayaran_Jemaah_Haji.objects.all()
+	pemasukan_umroh = Pembayaran_Jemaah_Umroh.objects.all()
+	total_pemasukan_umroh = 0
+	total_pemasukan_haji = 0
+	for pem_umroh in pemasukan_umroh:
+		total_pemasukan_umroh = total_pemasukan_umroh + pem_umroh.jumlah
 
-	obj = Tiket.objects.all()
-	context = {'obj':obj}
+
+	for pem_haji in pemasukan_haji:
+		total_pemasukan_haji = total_pemasukan_haji + pem_haji.jumlah
+
+
+	context = {'obj':'obj',
+				'jemaah_haji':jemaah_haji,
+				'jemaah_umroh':jemaah_umroh,
+				'pemasukan_haji':total_pemasukan_haji,
+				'pemasukan_umroh':total_pemasukan_umroh,
+
+				}
 	return render(request,'pembukuan/index.html',context)
 
 @login_required

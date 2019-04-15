@@ -1,5 +1,6 @@
 {% extends 'pembukuan/base.html' %}
 {% block content %}
+{% load humanize %}
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="page-header">
@@ -59,7 +60,7 @@
                           <td>{{ forloop.counter }}</td>
                           <td>{{ ob.waktu }}</td>
                           <td style="text-align: center;"><a href="">{{ ob.jemaah }}</a></td>
-                          <td style="width: 360px; text-align: right;">Rp. {{ ob.jumlah }}</td>
+                          <td style="width: 360px; text-align: right;">Rp. {{ ob.jumlah|intcomma }}</td>
                         </tr>
                         {% endfor %}
                       </tbody>
@@ -68,7 +69,7 @@
                   </div>
                   <div class="row">
                     <div class="col-lg-10 col-md-10">Total</div>
-                    <div class="col-lg-2 col-md-2">Rp. {{ total }}</div>
+                    <div class="col-lg-2 col-md-2">Rp. {{ total|intcomma }}</div>
                   </div>
                 </div>
               </div>

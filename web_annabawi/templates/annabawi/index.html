@@ -1,6 +1,7 @@
 {% extends 'annabawi/base.html' %}
 {% block content %}
 {% load static %}
+{% load humanize %}
         <!--  HOME SLIDER BLOCK  -->
         
         <div class="slider-wrap">
@@ -105,6 +106,7 @@
                 <div class="row">  
                     
                     <div class="service-carousel owl-carousel" data-dots="false" data-nav="false" data-items="3">
+                    {% for haj in haji %}
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             
                             <article class="service-block-2 text-center">
@@ -112,59 +114,35 @@
                                     <img src="{% static 'images/wkwk.jpg' %}"/>
                                 </figure>
                                 <h3>
-                                    <span>Haji</span>
+                                    <span>{{haj.get_cname}}</span>
                                     <br>
-                                    Agustus 2019
+                                    {{haj.pemberangkatan}}
                                     <br>
-                                    Rp. 60.000.000
+                                    Rp. {{haj.harga|intcomma}}
                                 </h3>
                             </article>
                         </div> <!--  end .col-lg-4 col-md-4 col-sm-12  -->
+                    {% endfor %}
+                    {% for umr in umroh %}
+
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <article class="service-block-2 text-center">
                                     <figure>
                                         <img src="{% static 'images/wiwi.jpg' %}"/>
                                     </figure>
                                     <h3>
-                                        <span>Haji</span>
+                                        <span>{{umr.get_cname}}</span>
                                       <br>
-                                       Juli 2019
+                                       {{ umr.pemberangkatan}}
                                        <br>
-                                    Rp. 60.000.000
+                                    Rp. {{umr.harga|intcomma}}
                                     </h3>
                                 </article>
                             </a>
                         </div> <!--  end .col-lg-4 col-md-4 col-sm-12  -->
+                        {% endfor %}
 
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                            <article class="service-block-2 text-center">
-                                <figure>
-                                    <img src="{% static 'images/wdwd.jpg' %}"/>
-                                    </figure>
-                                <h3>
-                                    <span>Umroh</span>
-                                    <br>
-                                    September 2019
-                                    <br>
-                                    Rp. 60.000.000
-                                </h3>
-                            </article>
-                        </div> <!--  end .col-lg-4 col-md-4 col-sm-12  -->
-
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                            <article class="service-block-2 text-center">
-                                <figure>
-                                    <img src="{% static 'images/wowo.jpg' %}"/>
-                                </figure>
-                                <h3>
-                                    <span>Umroh</span>
-                                    <br>
-                                    Desember 2019
-                                    <br>
-                                    Rp. 60.000.000
-                                </h3>
-                            </article>
-                        </div> <!--  end .col-lg-4 col-md-4 col-sm-12  -->
+                        <!--  end .col-lg-4 col-md-4 col-sm-12  -->
                     </div>
                 </div>  <!--  end .row  --> 
             </div> <!--  end .container  -->
@@ -196,13 +174,13 @@
                     <div class="col-sm-12 wow fadeInRight">
                         <h2 class="contact-title">Temukan Kami</h2>
                         <div class="section-google-map-block wow fadeInUp">
-                            <div id="map_canvas"></div>
-                        </div> <!-- end .section-content-block  -->                            
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d989.5744240360303!2d107.90381363685121!3d-7.2068388313300495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf4168677ac88e2dd!2sAn-Nabawi!5e0!3m2!1sen!2sid!4v1555293372407!5m2!1sen!2sid" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>                        </div> <!-- end .section-content-block  -->                            
                     </div> <!--  end col-sm-6  -->   
                     </div> <!--  end col-sm-6  -->
                 </div> <!-- end row  -->
             </div> <!--  end .container -->
         </section> <!-- end .section-content-block  -->
         
+
         <!-- START FOOTER  -->
 {% endblock %}

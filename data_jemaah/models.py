@@ -12,6 +12,9 @@ class Haji(models.Model):
 	
 	def __str__(self):
 		return self.pemberangkatan
+	def get_cname(self):
+		class_name = self.__class__.__name__
+		return class_name 
 
 class Umroh(models.Model):
 	pemberangkatan = models.CharField(max_length=100)
@@ -20,7 +23,9 @@ class Umroh(models.Model):
 	
 	def __str__(self):
 		return self.pemberangkatan
-
+	def get_cname(self):
+		class_name = self.__class__.__name__
+		return class_name 
 
 def path_and_rename(instance, filename):
     return (str(instance)+".jpg")

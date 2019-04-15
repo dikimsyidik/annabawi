@@ -1,6 +1,8 @@
 {% extends 'pembukuan/base.html' %}
-{% load static %}
 {% block content %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
 <div class="main-panel">
         <div class="content-wrapper">
           <div class="page-header">
@@ -26,7 +28,7 @@
                           <i class="icon-sm fas fa-chart-line mr-2"></i>
                           Pemasukan
                         </p>
-                        <h2>Rp. {{pemasukan_haji}}</h2>
+                        <h2>Rp. {{pemasukan_haji|intcomma}}</h2>
                       </div>
                   </div>
                 </div>
@@ -51,7 +53,7 @@
                           <i class="icon-sm fas fa-chart-line mr-2"></i>
                           Pemasukan
                         </p>
-                        <h2>Rp. {{pemasukan_umroh}} </h2>
+                        <h2>Rp. {{pemasukan_umroh |intcomma}} </h2>
                       </div>
                   </div>
                 </div>
@@ -68,14 +70,14 @@
                           <i class="icon-sm fas fa-chart-line mr-2"></i>
                           Pengeluaran
                         </p>
-                        <h2>Rp.</h2>
+                        <h2>Rp. {{ pengeluaran |intcomma}}</h2>
                       </div>
                       <div class="statistics-item">
                         <p>
                           <i class="icon-sm fas fa-heart mr-2"></i>
                           Laba
                         </p>
-                        <h2>Rp.</h2>
+                        <h2>Rp. {{ pemasukan_haji|add:pemasukan_umroh |sub:pengeluaran |intcomma}} </h2>
                       </div>
                   </div>
                 </div>

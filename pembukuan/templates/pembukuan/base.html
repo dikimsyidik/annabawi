@@ -82,6 +82,8 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
+          {% if request.user.email == 'annabawi@admin.com' or request.user.is_superuser %}
+          
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-advancedf" aria-expanded="false" aria-controls="ui-advancedf">
               <i class="fas fa-users menu-icon"></i>
@@ -121,12 +123,16 @@
               </ul>
             </div>
           </li>
+         {% else %}
+         {% endif %} 
+          {% if request.user.email == 'annabawi@pembukuan.com' or request.user.is_superuser %}
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="fab fa-wpforms menu-icon"></i>
               <span class="menu-title">Pengeluaran</span>
               <i class="menu-arrow"></i>
             </a>
+
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link" href="{% url 'tiket' %}">Tiket</a></li>
@@ -144,6 +150,8 @@
               </ul>
             </div>
           </li>
+          {% else %}
+          {% endif %}
 
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">

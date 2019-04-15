@@ -29,9 +29,11 @@ from .forms import (TiketForm,
 					TransfortasiForm,
 					ATKForm,
 					Pembukuan_PajakForm,
+					Pembukuan_HajiForm,
 					Pembukuan_Honor_KaryawanForm,
 
 	)
+total_pengeluaran = 0
 def rekap(request):
 	pengeluaran = 'Rekapan Keseluruhan'
 	query = request.GET.get("q", None)
@@ -67,6 +69,7 @@ def rekap(request):
 		print(gab.jumlah)
 	print(total)
 
+	total_pengeluaran = total
 
 
 	context = {'obj':hasil,
@@ -77,7 +80,6 @@ def rekap(request):
 
 
 @login_required
-@user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
 def dashboard(request):
 	jemaah_haji = Jemaah_Hajis.objects.all().count()
 	jemaah_umroh = Jemaah_Umroh.objects.all().count()
@@ -91,6 +93,35 @@ def dashboard(request):
 
 	for pem_haji in pemasukan_haji:
 		total_pemasukan_haji = total_pemasukan_haji + pem_haji.jumlah
+	tiket = Tiket.objects.all()
+	la = La.objects.all()
+	kendaraan = Kendaraan.objects.all()
+	pembukuan_umroh = Pembukuan_Umroh.objects.all()
+	handling = Handling.objects.all()
+	paspor = Paspor.objects.all()
+	transportasi = Transfortasi.objects.all()
+	atk = ATK.objects.all()
+	pembukuan_haji = Pembukuan_Haji.objects.all()
+	pembukuan_pajak = Pembukuan_Pajak.objects.all()
+	pembukuan_honor = Pembukuan_Honor_Karyawan.objects.all()
+	gabung = sorted(chain(tiket,
+						la,
+						kendaraan,
+						pembukuan_umroh,
+						handling,
+						paspor,
+						transportasi,
+						atk,
+						pembukuan_haji,
+						pembukuan_pajak,
+						pembukuan_honor,
+						),key = lambda instance:instance.jumlah)
+	hasil = gabung
+
+	total = 0
+	for gab in hasil:
+		total = total +gab.jumlah
+
 
 
 	context = {'obj':'obj',
@@ -98,6 +129,7 @@ def dashboard(request):
 				'jemaah_umroh':jemaah_umroh,
 				'pemasukan_haji':total_pemasukan_haji,
 				'pemasukan_umroh':total_pemasukan_umroh,
+				'pengeluaran':total
 
 				}
 	return render(request,'pembukuan/index.html',context)

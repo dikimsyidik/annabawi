@@ -24,8 +24,8 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar d-print-none">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href=""><img style="width:60px" src="{% static 'images/logo-yayasan.png' %}" alt="logo"/> An-Nabawi</a>
-        <a class="navbar-brand brand-logo-mini" href=""><img src="{% static 'images/logo-yayasan.png' %}" alt="logo"/></a>
+        <a class="navbar-brand brand-logo" href=""><img style="width:50px;height: 80px" src="{% static 'images/logo-yayasan.png' %}" alt="logo"/> An-Nabawi</a>
+        <a class="navbar-brand brand-logo-mini" href=""><img style="width:30px;height: 60px"  src="{% static 'images/logo-yayasan.png' %}" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-stretch">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -135,17 +135,17 @@
 
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="{% url 'tiket' %}">Tiket</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'la' %}">LA</a></li>  
-                <li class="nav-item"><a class="nav-link" href="{% url 'kendaraan' %}">Kendaraan</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'pembukuan_umroh' %}">Pembukuan Umroh</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'handling' %}">Handling</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'paspor' %}">Paspor</a></li> 
-                <li class="nav-item"><a class="nav-link" href="{% url 'transportasi' %}">Transportasi</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'atk' %}">ATK/Kantor</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'pembukuan_haji' %}">Pembukuan Haji</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'pembukuan_pajak' %}">Pembukuan Pajak</a></li> 
-                <li class="nav-item"><a class="nav-link" href="{% url 'pembukuan_honor_karyawan' %}">Pembukuan Honor Karyawan</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dashboard/tiket/{{tahunnya}}/{{bulannya}}/">Tiket</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dashboard/la/{{tahunnya}}/{{bulannya}}/">LA</a></li>  
+                <li class="nav-item"><a class="nav-link" href="/dashboard/kendaraan/{{tahunnya}}/{{bulannya}}/">Kendaraan</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dashboard/pembukuan_umroh/{{tahunnya}}/{{bulannya}}/">Pembukuan Umroh</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dashboard/handnling/{{tahunnya}}/{{bulannya}}/}">Handling</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dashboard/paspor/{{tahunnya}}/{{bulannya}}/">Paspor</a></li> 
+                <li class="nav-item"><a class="nav-link" href="/dashboard/transportasi/{{tahunnya}}/{{bulannya}}/">Transportasi</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dashboard/atk/{{tahunnya}}/{{bulannya}}/">ATK/Kantor</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dashboard/pembukuan_haji/{{tahunnya}}/{{bulannya}}/">Pembukuan Haji</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dashboard/pembukuan_pajak/{{tahunnya}}/{{bulannya}}/">Pembukuan Pajak</a></li> 
+                <li class="nav-item"><a class="nav-link" href="/dashboard/pembukuan_honor_karyawan/{{tahunnya}}/{{bulannya}}/">Pembukuan Honor Karyawan</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'rekap' %}">Rekapan Keseluruhan</a></li>
               </ul>
             </div>
@@ -186,6 +186,7 @@
   <script src="{% static 'js/dashboard.js' %}"></script>
   <!-- End custom js for this page-->
 <script src="{% static 'js/dropify.js' %}"></script>
+<script src="{% static 'js/formpickers.js' %}"></script>
 
 </body>
 

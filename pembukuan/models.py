@@ -7,6 +7,12 @@ class Tiket(models.Model):
 	rincian = models.CharField(max_length=200)
 	tanggal_input       = models.DateTimeField(auto_now_add=False)
 	jumlah = models.IntegerField()
+	timestamp =  models.DateTimeField(auto_now_add=True)
+
+	def save(self, *args, **kwargs):
+		if not self.tanggal_input:
+			self.tanggal_input = self.timestamp
+		super(Tiket, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return self.rincian

@@ -33,6 +33,8 @@ from .forms import (TiketForm,
 					Pembukuan_Honor_KaryawanForm,
 
 	)
+from datetime import datetime
+
 total_pengeluaran = 0
 def rekap(request):
 	pengeluaran = 'Rekapan Keseluruhan'
@@ -136,29 +138,37 @@ def dashboard(request):
 
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def tiket(request):
+def tiket_arsip(request,month,year):
 	pengeluaran = 'Tiket'
 	query = request.GET.get("q", None)
 	obj = Tiket.objects.all().order_by('-tanggal_input')
+
+	objeks = Tiket.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
 	b = 0
-	
-	for ob in obj:
+	for ob in objeks:
 		b = b +ob.jumlah
-	print(b)
+	# print(b)
 	total = b
+	tanggal = datetime.now()
+	bulan = tanggal.strftime("%B")
+	tahun = tanggal.strftime('%Y')
 
 	if query is not None:
-		obj = obj.filter(
+		obj = objeks.filter(
                 Q(rincian__icontains=query)
                 )
 	context = {'obj':obj,
 				'total':total,
 				'pengeluaran':pengeluaran,
+				'objeks':objeks,
+				'bulan':bulan,
+				'tahun':tahun,
 	}
 	return render(request,'pembukuan/tiket.html',context)
+
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def tiket_tambah(request):
+def tiket_tambah(request,month,year):
 	pengeluaran = 'Tiket'
 
 	form = TiketForm(request.POST or None)	
@@ -166,7 +176,7 @@ def tiket_tambah(request):
 		# hasil = int(form.data['tunggakan'])- int(form.data['bayar'])
 		obj  = form.save(commit=False)
 		obj.save()
-		return HttpResponseRedirect('/dashboard/tiket/')		
+		return HttpResponseRedirect('/dashboard/tiket/{year}/{month}/'.format(year = year,month=month))		
 
 			
 	context = {'form':form,'pengeluaran':pengeluaran}
@@ -174,24 +184,27 @@ def tiket_tambah(request):
 
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def tiket_hapus(request,id = None):
+def tiket_hapus(request,year,month,id = None):
 
 	obj = get_object_or_404(Tiket,id = id)
 	obj.delete()
-	return HttpResponseRedirect('/dashboard/tiket/')
+	return HttpResponseRedirect('/dashboard/tiket/{year}/{month}/'.format(year = year,month=month))
 #--------------LA---------------
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def la_view(request):
+def la_view(request,year,month):
 	pengeluaran = 'LA'
 	query = request.GET.get("q", None)
 	obj = La.objects.all().order_by('-tanggal_input')
+	objeks = La.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
 	b = 0
-	
-	for ob in obj:
+	for ob in objeks:
 		b = b +ob.jumlah
-	print(b)
+	# print(b)
 	total = b
+	tanggal = datetime.now()
+	bulan = tanggal.strftime("%B")
+	tahun = tanggal.strftime('%Y')
 
 	if query is not None:
 		obj = obj.filter(
@@ -200,11 +213,14 @@ def la_view(request):
 	context = {'obj':obj,
 				'total':total,
 				'pengeluaran':pengeluaran,
+				'objeks':objeks,
+				'bulan':bulan,
+				'tahun':tahun,
 	}
 	return render(request,'pembukuan/tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def la_tambah(request):
+def la_tambah(request,year,month):
 	pengeluaran = 'LA'
 
 	form = LaForm(request.POST or None)	
@@ -212,32 +228,35 @@ def la_tambah(request):
 		# hasil = int(form.data['tunggakan'])- int(form.data['bayar'])
 		obj  = form.save(commit=False)
 		obj.save()
-		return HttpResponseRedirect('/dashboard/la/')		
+		return HttpResponseRedirect('/dashboard/la/{year}/{month}/'.format(year = year,month=month))		
 
 			
 	context = {'form':form,'pengeluaran':pengeluaran}
 	return render(request,'pembukuan/f-tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def la_hapus(request):
+def la_hapus(request,year,month,id=None):
 
 	obj = get_object_or_404(La,id = id)
 	obj.delete()
-	return HttpResponseRedirect('/dashboard/la/')
+	return HttpResponseRedirect('/dashboard/la/{year}/{month}/'.format(year = year,month=month))		
 #--------------Kendaraan---------------
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def kendaraan(request):
+def kendaraan(request,year,month,id = None):
 
 	pengeluaran = 'Kendaraan'
 	query = request.GET.get("q", None)
 	obj = Kendaraan.objects.all().order_by('-tanggal_input')
+	objeks = Kendaraan.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
 	b = 0
-	
-	for ob in obj:
+	for ob in objeks:
 		b = b +ob.jumlah
-	print(b)
+	# print(b)
 	total = b
+	tanggal = datetime.now()
+	bulan = tanggal.strftime("%B")
+	tahun = tanggal.strftime('%Y')
 
 	if query is not None:
 		obj = obj.filter(
@@ -246,11 +265,14 @@ def kendaraan(request):
 	context = {'obj':obj,
 				'total':total,
 				'pengeluaran':pengeluaran,
+				'objeks':objeks,
+				'bulan':bulan,
+				'tahun':tahun,
 	}
 	return render(request,'pembukuan/tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def kendaraan_tambah(request):
+def kendaraan_tambah(request,year,month):
 	pengeluaran = 'Kendaraan'
 
 	form = KendaraanForm(request.POST or None)	
@@ -258,32 +280,35 @@ def kendaraan_tambah(request):
 		# hasil = int(form.data['tunggakan'])- int(form.data['bayar'])
 		obj  = form.save(commit=False)
 		obj.save()
-		return HttpResponseRedirect('/dashboard/kendaraan/')		
+		return HttpResponseRedirect('/dashboard/kendaraan/{year}/{month}/'.format(year = year,month=month))		
 
 			
 	context = {'form':form,'pengeluaran':pengeluaran}
 	return render(request,'pembukuan/f-tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def kendaraan_hapus(request,id=None):
+def kendaraan_hapus(request,year,month,id=None):
 	obj = get_object_or_404(Kendaraan,id = id)
 	obj.delete()
-	return HttpResponseRedirect('/dashboard/kendaraan/')
+	return HttpResponseRedirect('/dashboard/kendaraan/{year}/{month}/'.format(year = year,month=month))		
 #--------------pembukuan umroh---------------
 
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def pembukuan_umroh(request):
+def pembukuan_umroh(request,year,month):
 
 	pengeluaran = 'Pembukuan_Umroh'
 	query = request.GET.get("q", None)
 	obj = Pembukuan_Umroh.objects.all().order_by('-tanggal_input')
+	objeks = Pembukuan_Umroh.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
 	b = 0
-	
-	for ob in obj:
+	for ob in objeks:
 		b = b +ob.jumlah
-	print(b)
+	# print(b)
 	total = b
+	tanggal = datetime.now()
+	bulan = tanggal.strftime("%B")
+	tahun = tanggal.strftime('%Y')
 
 	if query is not None:
 		obj = obj.filter(
@@ -292,11 +317,14 @@ def pembukuan_umroh(request):
 	context = {'obj':obj,
 				'total':total,
 				'pengeluaran':pengeluaran,
+				'objeks':objeks,
+				'bulan':bulan,
+				'tahun':tahun,
 	}
 	return render(request,'pembukuan/tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def pembukuan_umroh_tambah(request):
+def pembukuan_umroh_tambah(request,year,month):
 	pengeluaran = 'Pembukuan Umroh'
 
 	form = Pembukuan_UmrohForm(request.POST or None)	
@@ -304,38 +332,34 @@ def pembukuan_umroh_tambah(request):
 		# hasil = int(form.data['tunggakan'])- int(form.data['bayar'])
 		obj  = form.save(commit=False)
 		obj.save()
-		return HttpResponseRedirect('/dashboard/pembukuan_umroh/')		
+		return HttpResponseRedirect('/dashboard/pembukuan_umroh/{year}/{month}/'.format(year = year,month=month))		
 
 			
 	context = {'form':form,'pengeluaran':pengeluaran}
 	return render(request,'pembukuan/f-tiket.html',context)
 @login_required
-@user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))	
-def pembukuan_umroh_edit(request):
-
-	obj = Tiket.objects.all()
-	# context = {'obj':obj}
-	return render(request,'pembukuan/index.html',context)
-@login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def pembukuan_umroh_hapus(request,id = None):
+def pembukuan_umroh_hapus(request,year,month,id = None):
 	obj = get_object_or_404(Pembukuan_Umroh,id = id)
 	obj.delete()
-	return HttpResponseRedirect('/dashboard/pembukuan_umroh/')
+	return HttpResponseRedirect('/dashboard/pembukuan_umroh/{year}/{month}/'.format(year = year,month=month))		
 #--------------Handling---------------
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def handling(request):
+def handling(request,year,month):
 
 	pengeluaran = 'Handling'
 	query = request.GET.get("q", None)
 	obj = Handling.objects.all().order_by('-tanggal_input')
+	objeks = Handling.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
 	b = 0
-	
-	for ob in obj:
+	for ob in objeks:
 		b = b +ob.jumlah
-	print(b)
+	# print(b)
 	total = b
+	tanggal = datetime.now()
+	bulan = tanggal.strftime("%B")
+	tahun = tanggal.strftime('%Y')
 
 	if query is not None:
 		obj = obj.filter(
@@ -344,11 +368,14 @@ def handling(request):
 	context = {'obj':obj,
 				'total':total,
 				'pengeluaran':pengeluaran,
+				'objeks':objeks,
+				'bulan':bulan,
+				'tahun':tahun,
 	}
 	return render(request,'pembukuan/tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def handling_tambah(request):
+def handling_tambah(request,year,month):
 
 	pengeluaran = 'Handling'
 
@@ -357,32 +384,35 @@ def handling_tambah(request):
 		# hasil = int(form.data['tunggakan'])- int(form.data['bayar'])
 		obj  = form.save(commit=False)
 		obj.save()
-		return HttpResponseRedirect('/dashboard/handling/')		
+		return HttpResponseRedirect('/dashboard/handling/{year}/{month}/'.format(year = year,month=month))		
 
 			
 	context = {'form':form,'pengeluaran':pengeluaran}
 	return render(request,'pembukuan/f-tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def handling_hapus(request,id = None):
+def handling_hapus(request,year,month,id = None):
 	obj = get_object_or_404(Handling,id = id)
 	obj.delete()
-	return HttpResponseRedirect('/dashboard/handling/')
+	return HttpResponseRedirect('/dashboard/handling/{year}/{month}/'.format(year = year,month=month))
 
 #--------------paspor---------------
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def paspor(request):
+def paspor(request,year,month):
 
 	pengeluaran = 'Paspor'
 	query = request.GET.get("q", None)
 	obj = Paspor.objects.all().order_by('-tanggal_input')
+	objeks = Paspor.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
 	b = 0
-	
-	for ob in obj:
+	for ob in objeks:
 		b = b +ob.jumlah
-	print(b)
+	# print(b)
 	total = b
+	tanggal = datetime.now()
+	bulan = tanggal.strftime("%B")
+	tahun = tanggal.strftime('%Y')
 
 	if query is not None:
 		obj = obj.filter(
@@ -391,12 +421,15 @@ def paspor(request):
 	context = {'obj':obj,
 				'total':total,
 				'pengeluaran':pengeluaran,
+				'objeks':objeks,
+				'bulan':bulan,
+				'tahun':tahun,
 	}
 	return render(request,'pembukuan/tiket.html',context)
 
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def paspor_tambah(request):
+def paspor_tambah(request,year,month):
 	pengeluaran = 'Paspor'
 
 	form = pasporForm(request.POST or None)	
@@ -404,32 +437,35 @@ def paspor_tambah(request):
 		# hasil = int(form.data['tunggakan'])- int(form.data['bayar'])
 		obj  = form.save(commit=False)
 		obj.save()
-		return HttpResponseRedirect('/dashboard/paspor/')		
+		return HttpResponseRedirect('/dashboard/paspor/{year}/{month}/'.format(year = year,month=month))		
 
 			
 	context = {'form':form,'pengeluaran':pengeluaran}
 	return render(request,'pembukuan/f-tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def paspor_hapus(request,id = None):
+def paspor_hapus(request,year,month,id = None):
 	obj = get_object_or_404(Paspor,id = id)
 	obj.delete()
-	return HttpResponseRedirect('/dashboard/paspor/')
+	return HttpResponseRedirect('/dashboard/paspor/{year}/{month}/'.format(year = year,month=month))
 
 #--------------LA---------------
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def transfortasi(request):
+def transfortasi(request,year,month):
 
 	pengeluaran = 'Transportasi'
 	query = request.GET.get("q", None)
 	obj = Transportasiet.objects.all().order_by('-tanggal_input')
+	objeks = Transfortasi.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
 	b = 0
-	
-	for ob in obj:
+	for ob in objeks:
 		b = b +ob.jumlah
-	print(b)
+	# print(b)
 	total = b
+	tanggal = datetime.now()
+	bulan = tanggal.strftime("%B")
+	tahun = tanggal.strftime('%Y')
 
 	if query is not None:
 		obj = obj.filter(
@@ -438,11 +474,14 @@ def transfortasi(request):
 	context = {'obj':obj,
 				'total':total,
 				'pengeluaran':pengeluaran,
+				'objeks':objeks,
+				'bulan':bulan,
+				'tahun':tahun,
 	}
 	return render(request,'pembukuan/tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def transfortasi_tambah(request):
+def transfortasi_tambah(request,year,month):
 	pengeluaran = 'Transportasi'
 
 	form = TransfortasiForm(request.POST or None)	
@@ -450,7 +489,7 @@ def transfortasi_tambah(request):
 		# hasil = int(form.data['tunggakan'])- int(form.data['bayar'])
 		obj  = form.save(commit=False)
 		obj.save()
-		return HttpResponseRedirect('/dashboard/transportasi/')		
+		return HttpResponseRedirect('/dashboard/transportasi/{year}/{month}/'.format(year = year,month=month))		
 
 			
 	context = {'form':form,'pengeluaran':pengeluaran}
@@ -464,23 +503,26 @@ def transfortasi_edit(request):
 	return render(request,'pembukuan/index.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def transfortasi_hapus(request,id = None):
+def transfortasi_hapus(request,year,month,id = None):
 	obj = get_object_or_404(Tiket,id = id)
 	obj.delete()
-	return HttpResponseRedirect('/dashboard/transportasi/')
+	return HttpResponseRedirect('/dashboard/transportasi/{year}/{month}/'.format(year = year,month=month))
 #--------------Pembukuan haji---------------
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def pembukuan_haji(request):
+def pembukuan_haji(request,year,month):
 	pengeluaran = 'Pembukuan_Haji'
 	query = request.GET.get("q", None)
 	obj = Pembukuan_Haji.objects.all().order_by('-tanggal_input')
+	objeks = Pembukuan_Haji.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
 	b = 0
-	
-	for ob in obj:
+	for ob in objeks:
 		b = b +ob.jumlah
-	print(b)
+	# print(b)
 	total = b
+	tanggal = datetime.now()
+	bulan = tanggal.strftime("%B")
+	tahun = tanggal.strftime('%Y')
 
 	if query is not None:
 		obj = obj.filter(
@@ -489,11 +531,14 @@ def pembukuan_haji(request):
 	context = {'obj':obj,
 				'total':total,
 				'pengeluaran':pengeluaran,
+				'objeks':objeks,
+				'bulan':bulan,
+				'tahun':tahun,
 	}
 	return render(request,'pembukuan/tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def pembukuan_haji_tambah(request):
+def pembukuan_haji_tambah(request,year,month):
 	pengeluaran = 'Pembukuan Haji'
 
 	form = Pembukuan_HajiForm(request.POST or None)	
@@ -501,32 +546,35 @@ def pembukuan_haji_tambah(request):
 		# hasil = int(form.data['tunggakan'])- int(form.data['bayar'])
 		obj  = form.save(commit=False)
 		obj.save()
-		return HttpResponseRedirect('/dashboard/pembukuan_haji/')		
+		return HttpResponseRedirect('/dashboard/pembukuan_haji/{year}/{month}/'.format(year = year,month=month))		
 
 			
 	context = {'form':form,'pengeluaran':pengeluaran}
 	return render(request,'pembukuan/f-tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def pembukuan_haji_hapus(request,id = None):
+def pembukuan_haji_hapus(request,year,month,id = None):
 	obj = get_object_or_404(Pembukuan_Haji,id = id)
 	obj.delete()
-	return HttpResponseRedirect('/dashboard/pembukuan_haji/')
+	return HttpResponseRedirect('/dashboard/pembukuan_haji/{year}/{month}/'.format(year = year,month=month))
 #--------------pembukuan pajak---------------
 
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def pembukuan_pajak(request):
+def pembukuan_pajak(request,year,month):
 
 	pengeluaran = 'Pembukuan Pajak'
 	query = request.GET.get("q", None)
 	obj = Pembukuan_Pajak.objects.all().order_by('-tanggal_input')
+	objeks = Pembukuan_Pajak.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
 	b = 0
-	
-	for ob in obj:
+	for ob in objeks:
 		b = b +ob.jumlah
-	print(b)
+	# print(b)
 	total = b
+	tanggal = datetime.now()
+	bulan = tanggal.strftime("%B")
+	tahun = tanggal.strftime('%Y')
 
 	if query is not None:
 		obj = obj.filter(
@@ -535,11 +583,14 @@ def pembukuan_pajak(request):
 	context = {'obj':obj,
 				'total':total,
 				'pengeluaran':pengeluaran,
+				'objeks':objeks,
+				'bulan':bulan,
+				'tahun':tahun,
 	}
 	return render(request,'pembukuan/tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def pembukuan_pajak_tambah(request):
+def pembukuan_pajak_tambah(request,year,month):
 	pengeluaran = 'Pembukuan Pajak'
 
 	form = Pembukuan_PajakForm(request.POST or None)	
@@ -547,31 +598,34 @@ def pembukuan_pajak_tambah(request):
 		# hasil = int(form.data['tunggakan'])- int(form.data['bayar'])
 		obj  = form.save(commit=False)
 		obj.save()
-		return HttpResponseRedirect('/dashboard/pembukuan_pajak/')		
+		return HttpResponseRedirect('/dashboard/pembukuan_pajak/{year}/{month}/'.format(year = year,month=month))		
 
 			
 	context = {'form':form,'pengeluaran':pengeluaran}
 	return render(request,'pembukuan/f-tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def pembukuan_pajak_hapus(request,id = None):
+def pembukuan_pajak_hapus(request,year,month,id = None):
 	obj = get_object_or_404(Pembukuan_Pajak,id = id)
 	obj.delete()
 	return HttpResponseRedirect('/dashboard/pembukuan_pajak/')
 #--------------Atk---------------
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def atk(request):
+def atk(request,year,month):
 
 	pengeluaran = 'ATK'
 	query = request.GET.get("q", None)
 	obj = ATK.objects.all().order_by('-tanggal_input')
+	objeks = ATK.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
 	b = 0
-	
-	for ob in obj:
+	for ob in objeks:
 		b = b +ob.jumlah
-	print(b)
+	# print(b)
 	total = b
+	tanggal = datetime.now()
+	bulan = tanggal.strftime("%B")
+	tahun = tanggal.strftime('%Y')
 
 	if query is not None:
 		obj = obj.filter(
@@ -580,11 +634,14 @@ def atk(request):
 	context = {'obj':obj,
 				'total':total,
 				'pengeluaran':pengeluaran,
+				'objeks':objeks,
+				'bulan':bulan,
+				'tahun':tahun,
 	}
 	return render(request,'pembukuan/tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def atk_tambah(request):
+def atk_tambah(request,year,month):
 	pengeluaran = 'ATK'
 
 	form = ATKForm(request.POST or None)	
@@ -592,31 +649,34 @@ def atk_tambah(request):
 		# hasil = int(form.data['tunggakan'])- int(form.data['bayar'])
 		obj  = form.save(commit=False)
 		obj.save()
-		return HttpResponseRedirect('/dashboard/atk/')		
+		return HttpResponseRedirect('/dashboard/atk/{year}/{month}/'.format(year = year,month=month))		
 
 			
 	context = {'form':form,'pengeluaran':pengeluaran}
 	return render(request,'pembukuan/f-tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def atk_hapus(request,id = None):
+def atk_hapus(request,year,month,id = None):
 	obj = get_object_or_404(ATK,id = id)
 	obj.delete()
-	return HttpResponseRedirect('/dashboard/atk/')
+	return HttpResponseRedirect('/dashboard/atk/{year}/{month}/'.format(year = year,month=month))
 #--------------Atk---------------
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def pembukuan_honor_karyawan(request):
+def pembukuan_honor_karyawan(request,year,month):
 
 	pengeluaran = 'Pembukuan Honor Karyawan'
 	query = request.GET.get("q", None)
 	obj = Pembukuan_Honor_Karyawan.objects.all().order_by('-tanggal_input')
+	objeks = Pembukuan_Honor_Karyawan.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
 	b = 0
-	
-	for ob in obj:
+	for ob in objeks:
 		b = b +ob.jumlah
-	print(b)
+	# print(b)
 	total = b
+	tanggal = datetime.now()
+	bulan = tanggal.strftime("%B")
+	tahun = tanggal.strftime('%Y')
 
 	if query is not None:
 		obj = obj.filter(
@@ -625,11 +685,14 @@ def pembukuan_honor_karyawan(request):
 	context = {'obj':obj,
 				'total':total,
 				'pengeluaran':pengeluaran,
+				'objeks':objeks,
+				'bulan':bulan,
+				'tahun':tahun,
 	}
 	return render(request,'pembukuan/tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def pembukuan_honor_karyawan_tambah(request):
+def pembukuan_honor_karyawan_tambah(request,year,month):
 	pengeluaran = 'Pembukuan Honor Karyawan'
 
 	form = Pembukuan_Honor_KaryawanForm(request.POST or None)	
@@ -637,14 +700,14 @@ def pembukuan_honor_karyawan_tambah(request):
 		# hasil = int(form.data['tunggakan'])- int(form.data['bayar'])
 		obj  = form.save(commit=False)
 		obj.save()
-		return HttpResponseRedirect('/dashboard/pembukuan_honor_karyawan/')		
+		return HttpResponseRedirect('/dashboard/pembukuan_honor_karyawan/{year}/{month}/'.format(year = year,month=month))		
 
 			
 	context = {'form':form,'pengeluaran':pengeluaran}
 	return render(request,'pembukuan/f-tiket.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
-def pembukuan_honor_karyawan_hapus(request):
+def pembukuan_honor_karyawan_hapus(request,year,month,id = None):
 	obj = get_object_or_404(Pembukuan_Honor_Karyawan,id = id)
 	obj.delete()
-	return HttpResponseRedirect('/dashboard/pembukuan_honor_karyawan/')
+	return HttpResponseRedirect('/dashboard/pembukuan_honor_karyawan/{year}/{month}/'.format(year = year,month=month))

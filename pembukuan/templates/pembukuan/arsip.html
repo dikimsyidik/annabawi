@@ -5,7 +5,7 @@
         <div class="content-wrapper">
           <div class="page-header">
             <h3 class="page-title">
-              {{ pengeluaran }} {{ bulan }} {{tahun}}
+              {{ pengeluaran }}
             </h3>
             <nav aria-label="breadcrumb">
             {% if pengeluaran == 'Rekapan Keseluruhan' %}
@@ -58,7 +58,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                      {% for ob in objeks %}
+                      {% for ob in obj %}
                         <tr>
                           <td>{{ forloop.counter }}</td>
                           <td>{{ ob.tanggal_input}}</td>
@@ -104,7 +104,7 @@
             {% regroup year.list by tanggal_input.month as month_list %}
             <ul>
             {% for month in month_list %}
-                <li><a href="/dashboard/tiket/{{year.grouper}}/{{month.grouper}}/">{{ month.list.0.tanggal_input|date:'b' }} ({{ month.list|length }})</a></li>
+                <li><a href="/dashboard/tiket{{year.grouper}}/{{month.grouper}}/">{{ month.list.0.tanggal_input|date:'b' }} ({{ month.list|length }})</a></li>
             {% endfor %}
             </ul>
         </li>

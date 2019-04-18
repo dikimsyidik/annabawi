@@ -19,6 +19,7 @@ from django.contrib.auth import views as auth_views,logout
 from django.http import HttpResponseRedirect
 from django.conf import settings
 from django.conf.urls.static import static 
+
 def logout_views(request):
     logout(request)
     return HttpResponseRedirect('/')

@@ -26,7 +26,7 @@ class TiketForm(forms.ModelForm):
 			widgets = {
 				'rincian':forms.Textarea(attrs={'class': 'form-control','rows':5,'placeholder':'Rincian'}),
 				'jumlah':forms.NumberInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
-				'tanggal_input':forms.TextInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
+				'tanggal_input':forms.TextInput(attrs={'class': 'form-control','placeholder':'Tanggal'}),
 
 			}
 
@@ -37,6 +37,7 @@ class LaForm(forms.ModelForm):
 			fields = [
 				'rincian',
 				'jumlah',
+				'tanggal_input',
 
 			] 
 			
@@ -44,6 +45,8 @@ class LaForm(forms.ModelForm):
 			widgets = {
 				'rincian':forms.Textarea(attrs={'class': 'form-control','rows':5,'placeholder':'Rincian'}),
 				'jumlah':forms.NumberInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
+				'tanggal_input':forms.TextInput(attrs={'class': 'form-control','placeholder':'Tanggal'}),
+
 			}
 
 class KendaraanForm(forms.ModelForm):
@@ -52,6 +55,7 @@ class KendaraanForm(forms.ModelForm):
 			fields = [
 				'rincian',
 				'jumlah',
+				'tanggal_input',
 
 			] 
 			
@@ -59,6 +63,8 @@ class KendaraanForm(forms.ModelForm):
 			widgets = {
 				'rincian':forms.Textarea(attrs={'class': 'form-control','rows':5,'placeholder':'Rincian'}),
 				'jumlah':forms.NumberInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
+				'tanggal_input':forms.TextInput(attrs={'class': 'form-control','placeholder':'Tanggal'}),
+
 			}
 
 class Pembukuan_UmrohForm(forms.ModelForm):
@@ -67,6 +73,7 @@ class Pembukuan_UmrohForm(forms.ModelForm):
 			fields = [
 				'rincian',
 				'jumlah',
+				'tanggal_input',
 
 			] 
 			
@@ -74,6 +81,8 @@ class Pembukuan_UmrohForm(forms.ModelForm):
 			widgets = {
 				'rincian':forms.Textarea(attrs={'class': 'form-control','rows':5,'placeholder':'Rincian'}),
 				'jumlah':forms.NumberInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
+				'tanggal_input':forms.TextInput(attrs={'class': 'form-control','placeholder':'Tanggal'}),
+
 			}
 
 class HandlingForm(forms.ModelForm):
@@ -82,6 +91,7 @@ class HandlingForm(forms.ModelForm):
 			fields = [
 				'rincian',
 				'jumlah',
+				'tanggal_input',
 
 			] 
 			
@@ -89,6 +99,8 @@ class HandlingForm(forms.ModelForm):
 			widgets = {
 				'rincian':forms.Textarea(attrs={'class': 'form-control','rows':5,'placeholder':'Rincian'}),
 				'jumlah':forms.NumberInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
+				'tanggal_input':forms.TextInput(attrs={'class': 'form-control','placeholder':'Tanggal'}),
+
 			}
 
 class PasporForm(forms.ModelForm):
@@ -97,6 +109,7 @@ class PasporForm(forms.ModelForm):
 			fields = [
 				'rincian',
 				'jumlah',
+				'tanggal_input',
 
 			] 
 			
@@ -104,6 +117,8 @@ class PasporForm(forms.ModelForm):
 			widgets = {
 				'rincian':forms.Textarea(attrs={'class': 'form-control','rows':5,'placeholder':'Rincian'}),
 				'jumlah':forms.NumberInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
+				'tanggal_input':forms.TextInput(attrs={'class': 'form-control','placeholder':'Tanggal'}),
+
 			}
 
 class TransfortasiForm(forms.ModelForm):
@@ -112,6 +127,7 @@ class TransfortasiForm(forms.ModelForm):
 			fields = [
 				'rincian',
 				'jumlah',
+				'tanggal_input',
 
 			] 
 			
@@ -119,6 +135,8 @@ class TransfortasiForm(forms.ModelForm):
 			widgets = {
 				'rincian':forms.Textarea(attrs={'class': 'form-control','rows':5,'placeholder':'Rincian'}),
 				'jumlah':forms.NumberInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
+				'tanggal_input':forms.TextInput(attrs={'class': 'form-control','placeholder':'Tanggal'}),
+
 			}
 
 class ATKForm(forms.ModelForm):
@@ -127,6 +145,7 @@ class ATKForm(forms.ModelForm):
 			fields = [
 				'rincian',
 				'jumlah',
+				'tanggal_input',
 
 			] 
 			
@@ -134,6 +153,8 @@ class ATKForm(forms.ModelForm):
 			widgets = {
 				'rincian':forms.Textarea(attrs={'class': 'form-control','rows':5,'placeholder':'Rincian'}),
 				'jumlah':forms.NumberInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
+				'tanggal_input':forms.TextInput(attrs={'class': 'form-control','placeholder':'Tanggal'}),
+
 			}
 
 class Pembukuan_HajiForm(forms.ModelForm):
@@ -142,6 +163,7 @@ class Pembukuan_HajiForm(forms.ModelForm):
 			fields = [
 				'rincian',
 				'jumlah',
+				'tanggal_input',
 
 			] 
 			
@@ -149,6 +171,8 @@ class Pembukuan_HajiForm(forms.ModelForm):
 			widgets = {
 				'rincian':forms.Textarea(attrs={'class': 'form-control','rows':5,'placeholder':'Rincian'}),
 				'jumlah':forms.NumberInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
+				'tanggal_input':forms.TextInput(attrs={'class': 'form-control','placeholder':'Tanggal'}),
+
 			}
 
 class Pembukuan_PajakForm(forms.ModelForm):
@@ -157,6 +181,7 @@ class Pembukuan_PajakForm(forms.ModelForm):
 			fields = [
 				'rincian',
 				'jumlah',
+				'tanggal_input',
 
 			] 
 			
@@ -164,6 +189,8 @@ class Pembukuan_PajakForm(forms.ModelForm):
 			widgets = {
 				'rincian':forms.Textarea(attrs={'class': 'form-control','rows':5,'placeholder':'Rincian'}),
 				'jumlah':forms.NumberInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
+				'tanggal_input':forms.TextInput(attrs={'class': 'form-control','placeholder':'Tanggal'}),
+
 			}
 
 class Pembukuan_Honor_KaryawanForm(forms.ModelForm):
@@ -172,6 +199,7 @@ class Pembukuan_Honor_KaryawanForm(forms.ModelForm):
 			fields = [
 				'rincian',
 				'jumlah',
+				'tanggal_input',
 
 			] 
 			
@@ -179,5 +207,6 @@ class Pembukuan_Honor_KaryawanForm(forms.ModelForm):
 			widgets = {
 				'rincian':forms.Textarea(attrs={'class': 'form-control','rows':5,'placeholder':'Rincian'}),
 				'jumlah':forms.NumberInput(attrs={'class': 'form-control','placeholder':'Jumlah'}),
-			}
+				'tanggal_input':forms.TextInput(attrs={'class': 'form-control','placeholder':'Tanggal'}),
 
+			}

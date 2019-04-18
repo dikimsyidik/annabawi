@@ -38,7 +38,7 @@ from data_jemaah.views import (
 from.views import (
                     dashboard,
                     rekap,
-                    tiket,
+                    tiket_arsip,
                     tiket_tambah,
                     tiket_hapus,
                     la_view,
@@ -49,7 +49,6 @@ from.views import (
                     kendaraan_hapus,
                     pembukuan_umroh,
                     pembukuan_umroh_tambah,
-                    pembukuan_umroh_edit,
                     pembukuan_umroh_hapus,
                     handling,
                     handling_tambah,
@@ -111,50 +110,50 @@ urlpatterns = [
     path('list_jemaah_umroh/edit/<slug:id>/', jemaah_umroh_edit,name='edit_jemaah_umroh'),
 
 
+    path('tiket/<int:year>/<int:month>/', tiket_arsip,name='tiket'),
+    
+    path('tiket/<int:year>/<int:month>/tambah/', tiket_tambah,name='tiket_tambah'),
+    path('tiket/<int:year>/<int:month>/hapus/<int:id>/', tiket_hapus,name='tiket_hapus'),
 
-    path('tiket/', tiket,name='tiket'),
-    path('tiket/tambah/', tiket_tambah,name='tiket_tambah'),
-    path('tiket/hapus/<int:id>/', tiket_hapus,name='tiket_hapus'),
 
+    path('la/<int:year>/<int:month>/', la_view,name='la'),
+    path('la/<int:year>/<int:month>/tambah/', la_tambah,name='tiket_tambah'),
+    path('la/<int:year>/<int:month>/hapus/<int:id>/', la_hapus,name='tiket_hapus'),
 
-    path('la/', la_view,name='la'),
-    path('la/tambah/', la_tambah,name='tiket_tambah'),
-    path('la/hapus/<int:id>/', la_hapus,name='tiket_hapus'),
+    path('kendaraan/<int:year>/<int:month>/', kendaraan,name='kendaraan'),
+    path('kendaraan/<int:year>/<int:month>/tambah/', kendaraan_tambah,name='tiket_tambah'),
+    path('kendaraan/<int:year>/<int:month>/hapus/<int:id>/', kendaraan_hapus,name='tiket_hapus'),
 
-    path('kendaraan/', kendaraan,name='kendaraan'),
-    path('kendaraan/tambah/', kendaraan_tambah,name='tiket_tambah'),
-    path('kendaraan/hapus/<int:id>/', kendaraan_hapus,name='tiket_hapus'),
+    path('pembukuan_umroh/<int:year>/<int:month>/', pembukuan_umroh,name='pembukuan_umroh'),
+    path('pembukuan_umroh/<int:year>/<int:month>/tambah/', pembukuan_umroh_tambah,name='tiket_tambah'),
+    path('pembukuan_umroh/<int:year>/<int:month>/hapus/<int:id>/', pembukuan_umroh_hapus,name='tiket_hapus'),
 
-    path('pembukuan_umroh/', pembukuan_umroh,name='pembukuan_umroh'),
-    path('pembukuan_umroh/tambah/', pembukuan_umroh_tambah,name='tiket_tambah'),
-    path('pembukuan_umroh/hapus/<int:id>/', pembukuan_umroh_hapus,name='tiket_hapus'),
+    path('handling/<int:year>/<int:month>/', handling,name='handling'),
+    path('handling_tambah/<int:year>/<int:month>/tambah/', handling_tambah,name='tiket_tambah'),
+    path('handling/<int:year>/<int:month>/hapus/<int:id>/', handling_hapus,name='tiket_hapus'),
 
-    path('handling/', handling,name='handling'),
-    path('handling_tambah/tambah/', handling_tambah,name='tiket_tambah'),
-    path('handling_hapus/hapus/<int:id>/', handling_hapus,name='tiket_hapus'),
+    path('paspor/<int:year>/<int:month>/', paspor,name='paspor'),
+    path('paspor/<int:year>/<int:month>/tambah/', paspor_tambah,name='tiket_tambah'),
+    path('paspor/<int:year>/<int:month>/hapus/<int:id>/', paspor_hapus,name='tiket_hapus'),
 
-    path('paspor/', paspor,name='paspor'),
-    path('paspor/tambah/', paspor_tambah,name='tiket_tambah'),
-    path('paspor/hapus/<int:id>/', paspor_hapus,name='tiket_hapus'),
+    path('transportasi/<int:year>/<int:month>/', transfortasi,name='transportasi'),
+    path('transportasi/<int:year>/<int:month>/tambah/', transfortasi_tambah,name='tiket_tambah'),
+    path('transportasi/<int:year>/<int:month>/hapus/<int:id>/', transfortasi_hapus,name='tiket_hapus'),
 
-    path('transportasi/', transfortasi,name='transportasi'),
-    path('transportasi/tambah/', transfortasi_tambah,name='tiket_tambah'),
-    path('transportasi/hapus/<int:id>/', transfortasi_hapus,name='tiket_hapus'),
+    path('pembukuan_haji/<int:year>/<int:month>/', pembukuan_haji,name='pembukuan_haji'),
+    path('pembukuan_haji/<int:year>/<int:month>/tambah/', pembukuan_haji_tambah,name='tiket_tambah'),
+    path('pembukuan_haji/<int:year>/<int:month>/hapus/<int:id>/', pembukuan_haji_hapus,name='tiket_hapus'),
 
-    path('pembukuan_haji/', pembukuan_haji,name='pembukuan_haji'),
-    path('pembukuan_haji/tambah/', pembukuan_haji_tambah,name='tiket_tambah'),
-    path('pembukuan_haji/hapus/<int:id>/', pembukuan_haji_hapus,name='tiket_hapus'),
-
-    path('pembukuan_pajak/', pembukuan_pajak,name='pembukuan_pajak'),
+    path('pembukuan_pajak/<int:year>/<int:month>/', pembukuan_pajak,name='pembukuan_pajak'),
     path('pembukuan_pajak/tambah/', pembukuan_pajak_tambah,name='tiket_tambah'),
-    path('pembukuan_pajak/hapus/<int:id>/', pembukuan_pajak_hapus,name='tiket_hapus'),
+    path('pembukuan_pajak/<int:year>/<int:month>/hapus/<int:id>/', pembukuan_pajak_hapus,name='tiket_hapus'),
 
-    path('atk/', atk,name='atk'),
-    path('atk/tambah/', atk_tambah,name='tiket_tambah'),
-    path('atk/hapus/<int:id>/', atk_hapus,name='tiket_hapus'),
+    path('atk/<int:year>/<int:month>/', atk,name='atk'),
+    path('atk/<int:year>/<int:month>/tambah/', atk_tambah,name='tiket_tambah'),
+    path('atk/<int:year>/<int:month>/hapus/<int:id>/', atk_hapus,name='tiket_hapus'),
 
-    path('pembukuan_honor_karyawan/', pembukuan_honor_karyawan,name='pembukuan_honor_karyawan'),
-    path('pembukuan_honor_karyawan/tambah/', pembukuan_honor_karyawan_tambah,name='tiket_tambah'),
-    path('pembukuan_honor_karyawan/hapus/<int:id>/', pembukuan_honor_karyawan_hapus,name='tiket_hapus'),
+    path('pembukuan_honor_karyawan/<int:year>/<int:month>/', pembukuan_honor_karyawan,name='pembukuan_honor_karyawan'),
+    path('pembukuan_honor_karyawan/<int:year>/<int:month>/tambah/', pembukuan_honor_karyawan_tambah,name='tiket_tambah'),
+    path('pembukuan_honor_karyawan/<int:year>/<int:month>/hapus/<int:id>/', pembukuan_honor_karyawan_hapus,name='tiket_hapus'),
 
     ]

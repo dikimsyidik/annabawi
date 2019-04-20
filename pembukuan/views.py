@@ -74,7 +74,7 @@ def rekap(request):
 	total_pengeluaran = total
 
 
-	context = {'obj':hasil,
+	context = {'objeks':hasil,
 				'total':total,
 				'pengeluaran':pengeluaran,
 	}
@@ -297,7 +297,7 @@ def kendaraan_hapus(request,year,month,id=None):
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
 def pembukuan_umroh(request,year,month):
 
-	pengeluaran = 'Pembukuan_Umroh'
+	pengeluaran = 'pembukuan_umroh'
 	query = request.GET.get("q", None)
 	obj = Pembukuan_Umroh.objects.all().order_by('-tanggal_input')
 	objeks = Pembukuan_Umroh.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
@@ -432,7 +432,7 @@ def paspor(request,year,month):
 def paspor_tambah(request,year,month):
 	pengeluaran = 'Paspor'
 
-	form = pasporForm(request.POST or None)	
+	form = PasporForm(request.POST or None)	
 	if form.is_valid():
 		# hasil = int(form.data['tunggakan'])- int(form.data['bayar'])
 		obj  = form.save(commit=False)
@@ -456,7 +456,7 @@ def transfortasi(request,year,month):
 
 	pengeluaran = 'Transportasi'
 	query = request.GET.get("q", None)
-	obj = Transportasiet.objects.all().order_by('-tanggal_input')
+	obj = Transfortasi.objects.all().order_by('-tanggal_input')
 	objeks = Transfortasi.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
 	b = 0
 	for ob in objeks:
@@ -511,7 +511,7 @@ def transfortasi_hapus(request,year,month,id = None):
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
 def pembukuan_haji(request,year,month):
-	pengeluaran = 'Pembukuan_Haji'
+	pengeluaran = 'pembukuan_haji'
 	query = request.GET.get("q", None)
 	obj = Pembukuan_Haji.objects.all().order_by('-tanggal_input')
 	objeks = Pembukuan_Haji.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
@@ -665,7 +665,7 @@ def atk_hapus(request,year,month,id = None):
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
 def pembukuan_honor_karyawan(request,year,month):
 
-	pengeluaran = 'Pembukuan Honor Karyawan'
+	pengeluaran = 'pembukuan_honor_karyawan'
 	query = request.GET.get("q", None)
 	obj = Pembukuan_Honor_Karyawan.objects.all().order_by('-tanggal_input')
 	objeks = Pembukuan_Honor_Karyawan.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')

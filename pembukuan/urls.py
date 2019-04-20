@@ -129,7 +129,7 @@ urlpatterns = [
     path('pembukuan_umroh/<int:year>/<int:month>/hapus/<int:id>/', pembukuan_umroh_hapus,name='tiket_hapus'),
 
     path('handling/<int:year>/<int:month>/', handling,name='handling'),
-    path('handling_tambah/<int:year>/<int:month>/tambah/', handling_tambah,name='tiket_tambah'),
+    path('handling/<int:year>/<int:month>/tambah/', handling_tambah,name='tiket_tambah'),
     path('handling/<int:year>/<int:month>/hapus/<int:id>/', handling_hapus,name='tiket_hapus'),
 
     path('paspor/<int:year>/<int:month>/', paspor,name='paspor'),

@@ -245,7 +245,7 @@ def la_hapus(request,year,month,id=None):
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
 def kendaraan(request,year,month,id = None):
 
-	pengeluaran = 'Kendaraan'
+	pengeluaran = 'kendaraan'
 	query = request.GET.get("q", None)
 	obj = Kendaraan.objects.all().order_by('-tanggal_input')
 	objeks = Kendaraan.objects.filter(tanggal_input__year=year,tanggal_input__month=month).order_by('-tanggal_input')
@@ -273,7 +273,7 @@ def kendaraan(request,year,month,id = None):
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
 def kendaraan_tambah(request,year,month):
-	pengeluaran = 'Kendaraan'
+	pengeluaran = 'kendaraan'
 
 	form = KendaraanForm(request.POST or None)	
 	if form.is_valid():
@@ -498,13 +498,13 @@ def transfortasi_tambah(request,year,month):
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
 def transfortasi_edit(request):
 
-	obj = Tiket.objects.all()
+	obj = Transfortasi.objects.all()
 	context = {'obj':obj}
 	return render(request,'pembukuan/index.html',context)
 @login_required
 @user_passes_test(lambda u:u.is_superuser or u.email.endswith('@pembukuan.com'))
 def transfortasi_hapus(request,year,month,id = None):
-	obj = get_object_or_404(Tiket,id = id)
+	obj = get_object_or_404(Transfortasi,id = id)
 	obj.delete()
 	return HttpResponseRedirect('/dashboard/transportasi/{year}/{month}/'.format(year = year,month=month))
 #--------------Pembukuan haji---------------
